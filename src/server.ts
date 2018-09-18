@@ -1,50 +1,39 @@
 import * as express from 'express';
 import { Request, Response } from 'express';
-
-import { Mongoose } from 'mongoose';
+import { MongoClient } from 'mongodb';
 
 const app = express();
 
-const mongoose = new Mongoose();
-mongoose.connect(
-  'mongodb://localhost:27017/urlshortener',
-  (err) => {
-    if (err) throw err;
-  }
-);
+// TODO: 2018-09-18 Leverage EvemtEmitter app.emit('ready') and app.on('ready')
+// to make sure database connection is up and ready before starting the application
+// see https://blog.cloudboost.io/waiting-for-db-connections-before-app-listen-in-node-f568af8b9ec9
+let client: MongoClient;
 
-const urlSchema = new mongoose.Schema(
-  {
-    original: String,
-    short_url: String,
-    clicks: { type: Number, default: 3 }
-  },
-  { timestamps: true }
-);
+MongoClient.connect('mongodb://localhost:27017')
+  .then((res) => {
+    client = res;
+    const db = client.db('urlshortener');
 
-const URL = mongoose.model('URL', urlSchema);
+    db.collection('urls')
+      .insertOne({
+        original: 'https://google.com',
+        short_url: 'test123'
+      })
+      .then((res) => console.log(res))
+      .catch((err) => console.error(err));
+  })
+  .catch((err) => console.error(err));
 
-let test = new URL({ original: 'https://twitter.com', short_url: 'qwe123' });
-test.save((err) => {
-  if (err) throw err;
-});
+//{ original: 'https://twitter.com', short_url: 'qwe123' }
 
 app.get('/:urlId', (req: Request, res: Response) => {
   console.log(`params: ${JSON.stringify(req.params)}`);
 
-  URL.findOne({ short_url: req.params.urlId })
-    .then((url: any) => {
-      if (url) {
-        console.log(url);
-        // Redirect to original URL in the return url object
-        res.redirect(url.original);
-        return;
-      }
-      res.send(`params: ${JSON.stringify(req.params)}`);
-    })
-    .catch((reason) => {
-      throw reason;
-    });
+  // db.collection('urls')
+  //   .findOne({ short_url: req.params.urlId })
+  //   .then((url) => console.log(url))
+  //   //res.send(`params: ${JSON.stringify(req.params)}`);
+  //   .catch((err) => console.log(err));
 });
 
 app.listen(3000, () => console.log('RUNNING'));

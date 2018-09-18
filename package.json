@@ -21,13 +21,11 @@
   },
   "homepage": "https://github.com/Blockost/url-shortener#readme",
   "dependencies": {
-    "body-parser": "^1.18.3",
     "express": "^4.16.3",
-    "mongoose": "^5.2.15"
+    "mongodb": "^3.1.6"
   },
   "devDependencies": {
     "@types/express": "^4.16.0",
-    "@types/mongodb": "^3.1.7",
-    "@types/mongoose": "^5.2.13"
+    "@types/mongodb": "^3.1.7"
   }
 }
