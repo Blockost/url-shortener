@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "URL shortener to ease links management",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "tsc && node server.js",
+    "test": "echo \"Error: no test specified\" && exit 0"
   },
   "repository": {
     "type": "git",
@@ -14,7 +15,7 @@
     "shortener",
     "link"
   ],
-  "author": "Blockost",
+  "author": "Blockost (Simon Espigolé)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Blockost/url-shortener/issues"

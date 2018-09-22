@@ -1,6 +1,6 @@
 import * as express from 'express';
 import { Request, Response } from 'express';
-import { MongoClient } from 'mongodb';
+import { MongoClient, Db } from 'mongodb';
 
 const app = express();
 
@@ -8,32 +8,31 @@ const app = express();
 // to make sure database connection is up and ready before starting the application
 // see https://blog.cloudboost.io/waiting-for-db-connections-before-app-listen-in-node-f568af8b9ec9
 let client: MongoClient;
+let db: Db;
 
-MongoClient.connect('mongodb://localhost:27017')
+MongoClient.connect(
+  'mongodb://localhost:27017',
+  { useNewUrlParser: true }
+)
   .then((res) => {
     client = res;
-    const db = client.db('urlshortener');
-
-    db.collection('urls')
-      .insertOne({
-        original: 'https://google.com',
-        short_url: 'test123'
-      })
-      .then((res) => console.log(res))
-      .catch((err) => console.error(err));
+    db = client.db('urlshortener');
   })
-  .catch((err) => console.error(err));
+  .catch((err) => {
+    throw err;
+  });
 
-//{ original: 'https://twitter.com', short_url: 'qwe123' }
+app.get('/404', (req: Request, res: Response) => {
+  res.send('URL not found, please try again.');
+});
 
 app.get('/:urlId', (req: Request, res: Response) => {
   console.log(`params: ${JSON.stringify(req.params)}`);
 
-  // db.collection('urls')
-  //   .findOne({ short_url: req.params.urlId })
-  //   .then((url) => console.log(url))
-  //   //res.send(`params: ${JSON.stringify(req.params)}`);
-  //   .catch((err) => console.log(err));
+  db.collection('urls')
+    .findOne({ short_url: req.params.urlId })
+    .then((url) => res.redirect(url.original))
+    .catch(() => res.redirect('/404'));
 });
 
-app.listen(3000, () => console.log('RUNNING'));
+app.listen(3000, () => console.log(`Server listening on port 3000`));
