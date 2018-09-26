@@ -128,7 +128,8 @@ gulp.task('copy:js', function() {
     .pipe(gulp.dest(paths.dist.base + '/js'));
 });
 
-// TODO: 2018-09-26 Bundle views/assets/js copy + scss compilation in one task!
+// TODO: 2018-09-26 Blockost
+// Bundle views/assets/js copy + scss compilation in one task!
 gulp.task('copy:assets', function() {
   return gulp
     .src(
