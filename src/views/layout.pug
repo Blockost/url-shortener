@@ -1,0 +1,44 @@
+doctype html
+html
+    head
+        meta(charset='utf-8')
+        meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+        meta(name='description' content='Simple, lightwight url-shortener')
+        meta(name='author' content='Blockost')
+        title Hello World!
+        
+        //- Favicon
+        link(href='/assets/img/brand/favicon.png', rel='icon', type='image/png')
+        
+        //- Fonts
+        link(href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700', rel='stylesheet')
+        
+        //- Icons
+        link(href='/assets/vendor/nucleo/css/nucleo.css', rel='stylesheet', type='text/css')
+        link(href='/node_modules/font-awesome/css/font-awesome.min.css', rel='stylesheet', type='text/css')
+        
+        //- Argon CSS
+        link(href='/assets/css/argon.css', rel='stylesheet', type='text/css')
+        
+        //- Additional styles
+        block style
+    body
+        //- Header
+        block header
+
+        //- Main content
+        block content
+
+        //- Footer
+        include includes/footer.pug
+        
+        //- Core
+        script(src='/node_modules/jquery/dist/jquery.min.js')
+        script(src='/node_modules/popper.js/dist/umd/popper.min.js')
+        script(src='/node_modules/bootstrap/dist/js/bootstrap.min.js')
+        //- Optional plugins
+        script(src='/assets/vendor/headroom/headroom.min.js')
+        //- Theme JS
+        script(src='/assets/js/argon.js')
+        //- Additional scripts
+        block scripts

@@ -1,8 +1,18 @@
 import * as express from 'express';
+import { join } from 'path';
 import { Request, Response } from 'express';
 import { MongoClient, Db } from 'mongodb';
 
 const app = express();
+
+// Declare 'pug' as the default templating engine
+app.set('view engine', 'pug');
+// Declare where the views template are stored
+app.set('views', join(__dirname, 'views'));
+
+// Declare static directories
+app.use('/node_modules', express.static(join(__dirname, '..', 'node_modules')));
+app.use('/assets', express.static(join(__dirname, 'assets')));
 
 // TODO: 2018-09-18 Leverage EvemtEmitter app.emit('ready') and app.on('ready')
 // to make sure database connection is up and ready before starting the application
@@ -22,8 +32,12 @@ MongoClient.connect(
     throw err;
   });
 
+app.get('/landing', (req: Request, res: Response) => {
+  res.render('landing');
+});
+
 app.get('/404', (req: Request, res: Response) => {
-  res.send('URL not found, please try again.');
+  res.render('index', { title: 'Hey', message: 'Hola!' });
 });
 
 app.get('/:urlId', (req: Request, res: Response) => {
