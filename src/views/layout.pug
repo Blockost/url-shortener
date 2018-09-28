@@ -33,9 +33,6 @@ html
         script(src='/node_modules/jquery/dist/jquery.min.js')
         script(src='/node_modules/popper.js/dist/umd/popper.min.js')
         script(src='/node_modules/bootstrap/dist/js/bootstrap.min.js')
-        //- Optional plugins
-        //-script(src='/assets/vendor/headroom/headroom.min.js')
-        //- Theme JS
-        script(src='/assets/js/argon.js')
-        //- Additional scripts
-        block scripts
+        
+        //- Bundle JS (Argon theme + other scripts)
+        script(src='/assets/scripts.bundle.js')

@@ -17,6 +17,8 @@ const sass = require('gulp-sass');
 const uglify = require('gulp-uglify');
 // Concatenate (aka bundle) files
 const concat = require('gulp-concat');
+// Delete files and folders
+const del = require('del');
 
 // TODO: 2018-09-27 Blockost
 // Check out browserSync and live-reloading of files using Gulp
@@ -153,9 +155,18 @@ const paths = {
 //   );
 // });
 
-gulp.task('css', (done) => {
+gulp.task('clean', () => {
+  // del is returning a Promise so no need to call a
+  // callback to tell the engine the task has completed
+  return del('./dist');
+});
+
+/**
+ * Compile, minify and copy sass files to the dist folder.
+ */
+gulp.task('build:css', (done) => {
   gulp
-    .src('./src/assets/scss/**/*.scss')
+    .src('./src/assets/**/*.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(
       autoprefixer({
@@ -170,12 +181,56 @@ gulp.task('css', (done) => {
   done();
 });
 
-gulp.task('js', () => {
-  // TODO: 2018-09-27 Blockost
-  // get + minify + bundle files
+/**
+ * Compile, minify and copy JS files to the dist folder.
+ */
+gulp.task('build:js', (done) => {
+  gulp
+    .src('./src/assets/**/*.js')
+    .pipe(uglify())
+    .pipe(concat('scripts.bundle.js'))
+    .pipe(gulp.dest('./dist/assets'));
+
+  // Task completion
+  done();
 });
 
-gulp.task('default', () => {
-  //runSequence(['scss', 'browserSync', 'watch'], callback);
-  // TODO: 2018-09-27 Blockost
+/**
+ * Copy misc assets (e.g fonts, images) to the dist folder.
+ */
+gulp.task('copy:assets', (done) => {
+  gulp
+    .src(['./src/assets/fonts/**/*', './src/assets/img/**/*'], {
+      base: './src/assets'
+    })
+    .pipe(gulp.dest('./dist/assets'));
+
+  // Task completion
+  done();
+});
+
+/**
+ * Copy views (PUG files) to the dist folder.
+ */
+gulp.task('copy:views', (done) => {
+  gulp.src('./src/views/**/*', { base: './src' }).pipe(gulp.dest('./dist'));
+
+  // Task completion
+  done();
+});
+
+gulp.task(
+  'build',
+  gulp.parallel('build:css', 'build:js', 'copy:assets', 'copy:views'),
+  (done) => {
+    done();
+  }
+);
+
+/**
+ * Default task.
+ */
+gulp.task('default', gulp.series('clean', 'build'), (done) => {
+  //runSequence(['scss', 'browserSync', 'watch'], done);
+  done();
 });
