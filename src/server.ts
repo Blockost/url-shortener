@@ -17,16 +17,14 @@ app.use('/assets', express.static(join(__dirname, 'assets')));
 // TODO: 2018-09-18 Leverage EvemtEmitter app.emit('ready') and app.on('ready')
 // to make sure database connection is up and ready before starting the application
 // see https://blog.cloudboost.io/waiting-for-db-connections-before-app-listen-in-node-f568af8b9ec9
-let client: MongoClient;
 let db: Db;
 
 MongoClient.connect(
   'mongodb://localhost:27017',
   { useNewUrlParser: true }
 )
-  .then((res) => {
-    client = res;
-    db = client.db('urlshortener');
+  .then((mongoClient: MongoClient) => {
+    db = mongoClient.db('urlshortener');
   })
   .catch((err) => {
     throw err;

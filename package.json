@@ -1,10 +1,10 @@
 {
   "name": "url-shortener",
   "version": "1.0.0",
-  "description": "URL shortener to ease links management",
+  "description": "URL shortener for easy link sharing and management",
   "scripts": {
     "start": "node dist/server.js",
-    "build": "tsc && gulp build && cp -r src/views dist/",
+    "build": "gulp && tsc",
     "test": "echo \"Error: no test specified\" && exit 0"
   },
   "repository": {
