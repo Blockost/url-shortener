@@ -3,6 +3,8 @@ import { join } from 'path';
 import { Request, Response } from 'express';
 import { MongoClient, Db } from 'mongodb';
 
+import { Event } from './Event';
+
 const app = express();
 
 // Declare 'pug' as the default templating engine
@@ -14,9 +16,6 @@ app.set('views', join(__dirname, 'views'));
 app.use('/node_modules', express.static(join(__dirname, '..', 'node_modules')));
 app.use('/assets', express.static(join(__dirname, 'assets')));
 
-// TODO: 2018-09-18 Leverage EvemtEmitter app.emit('ready') and app.on('ready')
-// to make sure database connection is up and ready before starting the application
-// see https://blog.cloudboost.io/waiting-for-db-connections-before-app-listen-in-node-f568af8b9ec9
 let db: Db;
 
 MongoClient.connect(
@@ -25,6 +24,7 @@ MongoClient.connect(
 )
   .then((mongoClient: MongoClient) => {
     db = mongoClient.db('urlshortener');
+    app.emit(Event.DATABASE_READY);
   })
   .catch((err) => {
     throw err;
@@ -47,4 +47,8 @@ app.get('/:urlId', (req: Request, res: Response) => {
     .catch(() => res.redirect('/404'));
 });
 
-app.listen(3000, () => console.log(`Server listening on port 3000`));
+app.on(Event.DATABASE_READY, () => {
+  console.log('Database is ready. Starting http server...');
+  const PORT = process.env.URL_SHORTENER_APP_PORT || 3000;
+  app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
+});

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "URL shortener for easy link sharing and management",
   "scripts": {
-    "start": "node dist/server.js",
+    "start": "npm run build && node dist/server.js",
     "build": "gulp && tsc",
     "test": "echo \"Error: no test specified\" && exit 0"
   },
