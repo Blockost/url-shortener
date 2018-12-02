@@ -1,7 +1,7 @@
 block header
-      nav#navbar-main.navbar.navbar-main.navbar-expand-lg.navbar-light
+      nav#navbar.navbar-main.navbar-expand-lg.navbar-transparent.navbar-light
         .container
-          a.navbar-brand.mr-lg-5(href='../index.html')
+          a.navbar-brand.mr-lg-5(href='/landing')
             img(src='/assets/img/brand/white.png')
           button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbar_global', aria-controls='navbar_global', aria-expanded='false', aria-label='Toggle navigation')
             span.navbar-toggler-icon
@@ -9,7 +9,7 @@ block header
             .navbar-collapse-header
               .row
                 .col-6.collapse-brand
-                  a(href='../index.html')
+                  a(href='/landing')
                     img(src='/assets/img/brand/blue.png')
                 .col-6.collapse-close
                   button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbar_global', aria-controls='navbar_global', aria-expanded='false', aria-label='Toggle navigation')
@@ -46,29 +46,13 @@ block header
                   i.ni.ni-collection.d-lg-none
                   span.nav-link-inner--text Examples
                 .dropdown-menu
-                  a.dropdown-item(href='../examples/landing.html') Landing
-                  a.dropdown-item(href='../examples/profile.html') Profile
-                  a.dropdown-item(href='../examples/login.html') Login
-                  a.dropdown-item(href='../examples/register.html') Register
+                  a.dropdown-item(href='/landing') Landing
+                  a.dropdown-item(href='/profile') Profile
+                  a.dropdown-item(href='/login') Login
+                  a.dropdown-item(href='/register') Register
             ul.navbar-nav.align-items-lg-center.ml-lg-auto
-              li.nav-item
-                a.nav-link.nav-link-icon(href='https://www.facebook.com/creativetim', target='_blank', data-toggle='tooltip', title='Like us on Facebook')
-                  i.fa.fa-facebook-square
-                  span.nav-link-inner--text.d-lg-none Facebook
-              li.nav-item
-                a.nav-link.nav-link-icon(href='https://www.instagram.com/creativetimofficial', target='_blank', data-toggle='tooltip', title='Follow us on Instagram')
-                  i.fa.fa-instagram
-                  span.nav-link-inner--text.d-lg-none Instagram
-              li.nav-item
-                a.nav-link.nav-link-icon(href='https://twitter.com/creativetim', target='_blank', data-toggle='tooltip', title='Follow us on Twitter')
-                  i.fa.fa-twitter-square
-                  span.nav-link-inner--text.d-lg-none Twitter
-              li.nav-item
-                a.nav-link.nav-link-icon(href='https://github.com/creativetimofficial/argon-design-system', target='_blank', data-toggle='tooltip', title='Star us on Github')
-                  i.fa.fa-github
-                  span.nav-link-inner--text.d-lg-none Github
               li.nav-item.d-none.d-lg-block.ml-lg-4
-                a.btn.btn-neutral.btn-icon(href='https://www.creative-tim.com/product/argon-design-system', target='_blank')
+                a.btn.btn-neutral.btn-icon(href='https://github.com/Blockost/url-shortener', target='_blank')
                   span.btn-inner--icon
-                    i.fa.fa-cloud-download.mr-2
-                  span.nav-link-inner--text Download
+                    i.fa.fa-github-download.mr-2
+                  span.nav-link-inner--text Star on Github
