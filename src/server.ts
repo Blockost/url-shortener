@@ -34,6 +34,18 @@ app.get('/landing', (req: Request, res: Response) => {
   res.render('landing');
 });
 
+app.get('/login', (req: Request, res: Response) => {
+  res.render('login');
+});
+
+app.get('/register', (req: Request, res: Response) => {
+  res.render('register');
+});
+
+app.get('/profile', (req: Request, res: Response) => {
+  res.render('profile');
+});
+
 app.get('/404', (req: Request, res: Response) => {
   res.render('index', { title: 'Hey', message: 'Hola!' });
 });

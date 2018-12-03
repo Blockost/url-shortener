@@ -1,0 +1,59 @@
+extends layout
+
+block content
+    main
+        section.section.section-shaped.section-lg
+            .shape.shape-style-1.bg-gradient-default
+                span
+                span
+                span
+                span
+                span
+                span
+                span
+                span
+            .container.pt-lg-md
+                .row.justify-content-center
+                    .col-lg-5
+                        .card.bg-secondary.shadow.border-0
+                            .card-header.bg-white.pb-5
+                                .text-muted.text-center.mb-3
+                                    small Sign in with
+                                .btn-wrapper.text-center
+                                    a.btn.btn-neutral.btn-icon(href='#')
+                                        span.btn-inner--icon
+                                            img(src='/assets/img/icons/common/github.svg')
+                                        span.btn-inner--text Github
+                                    a.btn.btn-neutral.btn-icon(href='#')
+                                        span.btn-inner--icon
+                                            img(src='/assets/img/icons/common/google.svg')
+                                        span.btn-inner--text Google
+                            .card-body.px-lg-5.py-lg-5
+                                .text-center.text-muted.mb-4
+                                    small Or sign in with credentials
+                                form(role='form')
+                                    .form-group.mb-3
+                                        .input-group.input-group-alternative
+                                            .input-group-prepend
+                                                span.input-group-text
+                                                    i.ni.ni-email-83
+                                            input.form-control(placeholder='Email', type='email')
+                                    .form-group
+                                        .input-group.input-group-alternative
+                                            .input-group-prepend
+                                                span.input-group-text
+                                                    i.ni.ni-lock-circle-open
+                                            input.form-control(placeholder='Password', type='password')
+                                    .custom-control.custom-control-alternative.custom-checkbox
+                                        input#customCheckLogin.custom-control-input(type='checkbox')
+                                        label.custom-control-label(for='customCheckLogin')
+                                            span Remember me
+                                    .text-center
+                                        button.btn.btn-primary.my-4(type='button') Sign in
+                        .row.mt-3
+                            .col-6
+                                a.text-light(href='#')
+                                    small Forgot password?
+                            .col-6.text-right
+                                a.text-light(href='#')
+                                    small Create new account
