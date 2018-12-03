@@ -30,8 +30,8 @@ MongoClient.connect(
     throw err;
   });
 
-app.get('/landing', (req: Request, res: Response) => {
-  res.render('landing');
+app.get('/', (req: Request, res: Response) => {
+  res.render('home');
 });
 
 app.get('/login', (req: Request, res: Response) => {
@@ -47,7 +47,7 @@ app.get('/profile', (req: Request, res: Response) => {
 });
 
 app.get('/404', (req: Request, res: Response) => {
-  res.render('index', { title: 'Hey', message: 'Hola!' });
+  res.render('404');
 });
 
 app.get('/:urlId', (req: Request, res: Response) => {

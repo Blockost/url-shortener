@@ -20,19 +20,19 @@ block content
                         .row
                             .col-lg-6
                                 h1.display-3.text-white
-                                    | A beautiful Design System
-                                    span completed with examples
+                                    | Empower your links for free
+                                    //- span completed with examples
                                 p.lead.text-white
-                                    | The design system comes with four pre-built pages to help you get started faster. You can change the text and images and you're good to go.
+                                    | Shorten long, unfriendly links in a matter of seconds using this simple link management platform. Create an account to track your links and get useful insights.
                                 .btn-wrapper
-                                    a.btn.btn-info.btn-icon.mb-3.mb-sm-0(href='https://demos.creative-tim.com/argon-design-system/docs/components/alerts.html')
+                                    a.btn.btn-info.btn-icon.mb-3.mb-sm-0(href='/login')
                                         span.btn-inner--icon
-                                            i.fa.fa-code
-                                        span.btn-inner--text Components
-                                    a.btn.btn-white.btn-icon.mb-3.mb-sm-0(href='https://www.creative-tim.com/product/argon-design-system')
+                                            i.fa.fa-sign-in
+                                        span.btn-inner--text Login
+                                    a.btn.btn-white.btn-icon.mb-3.mb-sm-0(href='/register')
                                         span.btn-inner--icon
-                                            i.ni.ni-cloud-download-95
-                                        span.btn-inner--text Download HTML
+                                            i.fa.fa-user
+                                        span.btn-inner--text Register
                 // SVG separator
                 .separator.separator-bottom.separator-skew
                     svg(x='0', y='0', viewBox='0 0 2560 100', preserveAspectRatio='none', version='1.1', xmlns='http://www.w3.org/2000/svg')
@@ -43,45 +43,8 @@ block content
                 .row.justify-content-center
                     .col-lg-12
                         .row.row-grid
-                            .col-lg-4
-                                .card.card-lift--hover.shadow.border-0
-                                    .card-body.py-5
-                                        .icon.icon-shape.icon-shape-primary.rounded-circle.mb-4
-                                            i.ni.ni-check-bold
-                                        h6.text-primary.text-uppercase Download Argon
-                                        p.description.mt-3
-                                            | Argon is a great free UI package based on Bootstrap 4 that includes the most important components and features.
-                                        div
-                                            span.badge.badge-pill.badge-primary design
-                                            span.badge.badge-pill.badge-primary system
-                                            span.badge.badge-pill.badge-primary creative
-                                        a.btn.btn-primary.mt-4(href='#') Learn more
-                            .col-lg-4
-                                .card.card-lift--hover.shadow.border-0
-                                    .card-body.py-5
-                                        .icon.icon-shape.icon-shape-success.rounded-circle.mb-4
-                                            i.ni.ni-istanbul
-                                        h6.text-success.text-uppercase Build Something
-                                        p.description.mt-3
-                                            | Argon is a great free UI package based on Bootstrap 4 that includes the most important components and features.
-                                        div
-                                            span.badge.badge-pill.badge-success business
-                                            span.badge.badge-pill.badge-success vision
-                                            span.badge.badge-pill.badge-success success
-                                        a.btn.btn-success.mt-4(href='#') Learn more
-                            .col-lg-4
-                                .card.card-lift--hover.shadow.border-0
-                                    .card-body.py-5
-                                        .icon.icon-shape.icon-shape-warning.rounded-circle.mb-4
-                                            i.ni.ni-planet
-                                        h6.text-warning.text-uppercase Prepare Launch
-                                        p.description.mt-3
-                                            | Argon is a great free UI package based on Bootstrap 4 that includes the most important components and features.
-                                        div
-                                            span.badge.badge-pill.badge-warning marketing
-                                            span.badge.badge-pill.badge-warning product
-                                            span.badge.badge-pill.badge-warning launch
-                                        a.btn.btn-warning.mt-4(href='#') Learn more
+                            .form-group
+                                input.form-control.form-control-alternative(type="text" placeholder="https://example.com/thisisaverylonglink")
         section.section.section-lg
             .container
                 .row.row-grid.align-items-center
