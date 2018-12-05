@@ -13,12 +13,14 @@ const autoprefixer = require('gulp-autoprefixer');
 const cleanCss = require('gulp-clean-css');
 // Compile SASS (.scss) files
 const sass = require('gulp-sass');
-// Minify JS files
-const uglify = require('gulp-uglify');
+// Uglify JS files (with ES6+ support)
+const terser = require('gulp-terser'); 
 // Concatenate (aka bundle) files
 const concat = require('gulp-concat');
 // Delete files and folders
 const del = require('del');
+// Display Gulp plugins errors
+const pluginError = require('plugin-error');
 
 // TODO: 2018-09-27 Blockost
 // Check out browserSync and live-reloading of files using Gulp
@@ -187,7 +189,10 @@ gulp.task('build:css', (done) => {
 gulp.task('build:js', (done) => {
   gulp
     .src('./src/assets/**/*.js')
-    .pipe(uglify())
+    .pipe(terser())
+    .on('error', (err) => {
+      throw new pluginError('terser', err).toString();
+    })
     .pipe(concat('scripts.bundle.js'))
     .pipe(gulp.dest('./dist/assets'));
 
