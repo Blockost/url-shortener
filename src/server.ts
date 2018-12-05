@@ -1,9 +1,11 @@
 import * as express from 'express';
+import * as bodyParser from 'body-parser';
 import { join } from 'path';
 import { Request, Response } from 'express';
 import { MongoClient, Db } from 'mongodb';
 
-import { Event } from './Event';
+import { Event } from './models/Event';
+import { StringRandomizer } from './StringRandomizer';
 
 const app = express();
 
@@ -15,6 +17,9 @@ app.set('views', join(__dirname, 'views'));
 // Declare static directories
 app.use('/node_modules', express.static(join(__dirname, '..', 'node_modules')));
 app.use('/assets', express.static(join(__dirname, 'assets')));
+
+// Middlewares
+app.use(bodyParser.json());
 
 let db: Db;
 
@@ -57,6 +62,30 @@ app.get('/:urlId', (req: Request, res: Response) => {
     .findOne({ short_url: req.params.urlId })
     .then((url) => res.redirect(url.original))
     .catch(() => res.redirect('/404'));
+});
+
+app.post('/shorten', (req: Request, res: Response) => {
+  console.log(`body:${JSON.stringify(req.body)}`);
+  const original_url = req.body.original_url;
+  const short_url = `${StringRandomizer.randomAlphaNumeric(8)}`;
+
+  // TODO: 2018-12-04 Blockost
+  // Re-generate short_url if it already exists
+  const cursor = db
+    .collection('urls')
+    .find({ short_url: short_url })
+    .limit(1);
+
+  console.log(cursor);
+
+  db.collection('urls')
+    .insertOne({ original: original_url, short_url: short_url })
+    .then((_id) => console.log(`_id:${_id}`))
+    .catch((err) => {
+      throw err;
+    });
+
+  res.send({ short_url: short_url });
 });
 
 app.on(Event.DATABASE_READY, () => {
