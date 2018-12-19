@@ -40,7 +40,8 @@
     "popper.js": "^1.14.4",
     "pug": "^2.0.3",
     "pump": "^3.0.0",
-    "run-sequence": "^2.2.1"
+    "run-sequence": "^2.2.1",
+    "string-randomizer": "^1.0.2"
   },
   "devDependencies": {
     "@types/express": "^4.16.0",

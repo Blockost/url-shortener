@@ -5,7 +5,7 @@ import { Request, Response } from 'express';
 import { MongoClient, Db } from 'mongodb';
 
 import { Event } from './models/Event';
-import { StringRandomizer } from './StringRandomizer';
+import { StringRandomizer } from 'string-randomizer';
 
 const app = express();
 
