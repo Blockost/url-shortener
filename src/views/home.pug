@@ -44,9 +44,13 @@ block content
                     .col-lg-12
                         .row.row-grid
                             .form-group
-                                //- TODO: Improve design + remove http/https protocol from url body
-                                input#input_link2shorten.form-control.form-control-alternative(type='text' placeholder='https://example.com/thisisaverylonglink')
-                                button(onclick="shorten(this)") Shorten!
+                                .input-group.input-group-alternative
+                                    .input-group-prepand
+                                        span.input-group-text https://
+                                        //- TODO: Improve design + remove http/https protocol from url body
+                                    input#input_link2shorten.form-control.form-control-alternative(type='text' placeholder='https://example.com/thisisaverylonglink')
+                                    button.btn.btn-icon.btn-2.btn-primary(type='button' onclick='shorten()') Shorten! 
+                                        i.fa.fa-space-shuttle
         section.section.section-lg
             .container
                 .row.row-grid.align-items-center

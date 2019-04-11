@@ -56,12 +56,15 @@ app.get('/404', (req: Request, res: Response) => {
 });
 
 app.get('/:urlId', (req: Request, res: Response) => {
-  console.log(`params: ${JSON.stringify(req.params)}`);
-
   db.collection('urls')
     .findOne({ short_url: req.params.urlId })
-    .then((url) => res.redirect(url.original))
-    .catch(() => res.redirect('/404'));
+    .then((url) => {
+      res.redirect(url.original);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.redirect('/404');
+    });
 });
 
 app.post('/shorten', (req: Request, res: Response) => {
